@@ -1,4 +1,5 @@
 import 'package:currency_converter_app/converter_ui.dart';
+import 'package:currency_converter_app/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,8 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Currency Converter',
-      theme: ThemeData(primarySwatch: Colors.indigo),
-      home: const ConverterUI(),
+      theme: ThemeData(
+          primarySwatch: Colors.indigo,
+          scaffoldBackgroundColor: Colors.blueAccent[100]),
+      home: const HomePage(),
     );
   }
 }

@@ -9,6 +9,7 @@ class ConverterUI extends StatefulWidget {
 }
 
 class _ConverterUIState extends State<ConverterUI> {
+  int result = 100;
   String baseCurrency = "USD";
   String targetCurrency = "GBP";
   List<String> baseCurrencies = [
@@ -36,10 +37,6 @@ class _ConverterUIState extends State<ConverterUI> {
 
   void convertCurrency() {}
 
-  void changeConversion() {
-    targetCurrency = baseCurrency;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,8 +45,21 @@ class _ConverterUIState extends State<ConverterUI> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 30.0),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('assetName')),
+          // gradient: LinearGradient(
+          //   // Where the linear gradient begins and ends
+          //   begin: Alignment.topRight,
+          //   end: Alignment.bottomLeft,
+          //   colors: [
+          //     Colors.white,
+          //     Colors.purple,
+          //     Colors.green,
+          //     Colors.blue,
+          //   ],
+          // ),
+        ),
         child: Column(
           children: [
             Padding(
@@ -82,7 +92,7 @@ class _ConverterUIState extends State<ConverterUI> {
                     }).toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        baseCurrency = newValue!;
+                        targetCurrency = newValue!;
                       });
                     },
                   ),
@@ -102,8 +112,13 @@ class _ConverterUIState extends State<ConverterUI> {
                     hintText: "e.g 1.0$baseCurrency"),
               ),
             ),
+            Icon(
+              CupertinoIcons.arrow_down,
+              size: 30,
+            ),
+            ResultBox(result: result, targetCurrency: targetCurrency),
             ElevatedButton(
-              onPressed: changeConversion,
+              onPressed: convertCurrency,
               child: Text(
                 "Convert",
               ),
@@ -112,6 +127,41 @@ class _ConverterUIState extends State<ConverterUI> {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ResultBox extends StatelessWidget {
+  const ResultBox({
+    super.key,
+    required this.result,
+    required this.targetCurrency,
+  });
+
+  final int result;
+  final String targetCurrency;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+      child: Container(
+        height: 50,
+        width: 370,
+        child: DecoratedBox(
+            decoration: BoxDecoration(
+                color: Colors.indigo[400],
+                borderRadius: BorderRadius.circular(5.0)),
+            child: Padding(
+                padding: EdgeInsets.only(top: 15.0, left: 20.0),
+                child: Text(
+                  "You get $result$targetCurrency",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 17.0,
+                      color: Colors.black),
+                ))),
       ),
     );
   }
