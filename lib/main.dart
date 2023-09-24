@@ -15,9 +15,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Currency Converter',
       theme: ThemeData(
-          hintColor: Colors.white,
-          primarySwatch: Colors.indigo,
-          scaffoldBackgroundColor: Colors.blueAccent[100]),
+        hintColor: Colors.white,
+        primarySwatch: Colors.purple,
+        scaffoldBackgroundColor: Colors.purpleAccent[200],
+      ),
       home: HomePage(),
     );
   }

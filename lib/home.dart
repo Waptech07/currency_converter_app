@@ -50,19 +50,25 @@ class _HomePageState extends State<HomePage> {
               child: controller.isLoading
                   ? CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
-                  : Icon(CupertinoIcons.arrow_right_arrow_left),
+                  : Icon(
+                      CupertinoIcons.arrow_right_arrow_left,
+                      color: Colors.white,
+                    ),
             );
           }),
       appBar: AppBar(
         title: Text('Currency Converter'),
         centerTitle: true,
+        elevation: 0,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 50.0),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.blue),
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.deepPurple[500]),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
@@ -74,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       init: _currencyController,
                       builder: (controller) {
                         return DropdownButton(
-                            dropdownColor: Colors.white70,
+                            dropdownColor: Colors.deepPurple[200],
                             borderRadius: BorderRadius.circular(20.0),
                             isExpanded: true,
                             value: _selectedFrom,
@@ -83,8 +89,12 @@ class _HomePageState extends State<HomePage> {
                                   String val = entry.code ?? "";
                                   return DropdownMenuItem(
                                       value: val,
-                                      child:
-                                          Text('$val  ${entry.description}'));
+                                      child: Text(
+                                        '$val  ${entry.description}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ));
                                 }).toList() ??
                                 [],
                             onChanged: (value) {
@@ -102,18 +112,19 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Expanded(
                         child: Divider(
-                      color: Colors.indigo,
+                      color: Colors.purpleAccent[200],
                     )),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Icon(
                         CupertinoIcons.arrow_down_circle,
                         size: 30.0,
+                        color: Colors.purpleAccent,
                       ),
                     ),
                     Expanded(
                         child: Divider(
-                      color: Colors.indigo,
+                      color: Colors.purpleAccent[200],
                     ))
                   ],
                 ),
@@ -123,14 +134,20 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   width: double.infinity,
                   child: DropdownButton(
-                      dropdownColor: Colors.white70,
+                      dropdownColor: Colors.deepPurple[200],
                       borderRadius: BorderRadius.circular(20.0),
                       isExpanded: true,
                       value: _symbol,
                       hint: Text('To'),
                       items: symbols.map((String value) {
                         return DropdownMenuItem<String>(
-                            value: value, child: Text(value));
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ));
                       }).toList(),
                       onChanged: (value) {
                         setState(() {
@@ -146,16 +163,15 @@ class _HomePageState extends State<HomePage> {
                   decoration: InputDecoration(
                       hintText: "e.g 10.0${_selectedFrom ?? " "}",
                       labelText: "Enter Amount",
+                      labelStyle: TextStyle(color: Colors.white),
                       border: InputBorder.none,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.indigo,
+                          color: Colors.white,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.indigo,
-                      ))),
+                          borderSide: BorderSide(color: Colors.white))),
                 ),
                 Spacer(),
                 ConvertedAmount(currencyController: _currencyController)
