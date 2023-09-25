@@ -21,7 +21,6 @@ class CurrencyController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getAllSymbols();
     super.onInit();
   }

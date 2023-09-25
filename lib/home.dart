@@ -174,7 +174,8 @@ class _HomePageState extends State<HomePage> {
                           borderSide: BorderSide(color: Colors.white))),
                 ),
                 Spacer(),
-                ConvertedAmount(currencyController: _currencyController)
+                ConvertedAmount(
+                    currencyController: _currencyController, symbol: _symbol)
               ],
             ),
           ),
@@ -185,24 +186,26 @@ class _HomePageState extends State<HomePage> {
 }
 
 class ConvertedAmount extends StatelessWidget {
-  const ConvertedAmount({
+  ConvertedAmount({
     super.key,
     required CurrencyController currencyController,
+    this.symbol,
   }) : _currencyController = currencyController;
 
   final CurrencyController _currencyController;
+  String? symbol;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
       child: Center(
         child: GetBuilder<CurrencyController>(
             init: _currencyController,
             builder: (controller) {
               return Text(
-                'Result: ${controller.result}',
-                style: TextStyle(fontSize: 25.0, color: Colors.white),
+                'Result: ${controller.result} ${symbol ?? ""}',
+                style: TextStyle(fontSize: 22.0, color: Colors.white),
               );
             }),
       ),
